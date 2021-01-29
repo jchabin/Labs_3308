@@ -1,0 +1,106 @@
+Microsoft Windows [Version 10.0.18363.1316]
+(c) 2019 Microsoft Corporation. All rights reserved.
+
+C:\Users\jchab>docker run hello-world
+Unable to find image 'hello-world:latest' locally
+latest: Pulling from library/hello-world
+0e03bdcc26d7: Pull complete                                                                                             Digest: sha256:31b9c7d48790f0d8c50ab433d9c3b7e17666d6993084c002c2ff1ca09b96391d
+Status: Downloaded newer image for hello-world:latest
+
+Hello from Docker!
+This message shows that your installation appears to be working correctly.
+
+To generate this message, Docker took the following steps:
+ 1. The Docker client contacted the Docker daemon.
+ 2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
+    (amd64)
+ 3. The Docker daemon created a new container from that image which runs the
+    executable that produces the output you are currently reading.
+ 4. The Docker daemon streamed that output to the Docker client, which sent it
+    to your terminal.
+
+To try something more ambitious, you can run an Ubuntu container with:
+ $ docker run -it ubuntu bash
+
+Share images, automate workflows, and more with a free Docker ID:
+ https://hub.docker.com/
+
+For more examples and ideas, visit:
+ https://docs.docker.com/get-started/
+
+
+C:\Users\jchab>docker ps -a
+CONTAINER ID   IMAGE               COMMAND                  CREATED          STATUS                      PORTS                NAMES
+effd3939dacc   hello-world         "/hello"                 18 seconds ago   Exited (0) 17 seconds ago                        jovial_mahavira
+c2c76065bb9e   docker101tutorial   "/docker-entrypoint.…"   2 minutes ago    Up 2 minutes                0.0.0.0:80->80/tcp   docker-tutorial
+1d2e4ed4faa0   alpine/git          "git clone https://g…"   5 minutes ago    Exited (0) 5 minutes ago                         repo
+
+C:\Users\jchab>docker rm jovial-mahavira
+Error: No such container: jovial-mahavira
+
+C:\Users\jchab>docker rm jovial_mahavira
+jovial_mahavira
+
+C:\Users\jchab>\docker ps -a
+'\docker' is not recognized as an internal or external command,
+operable program or batch file.
+
+C:\Users\jchab>docker ps -a
+CONTAINER ID   IMAGE               COMMAND                  CREATED         STATUS                     PORTS                NAMES
+c2c76065bb9e   docker101tutorial   "/docker-entrypoint.…"   3 minutes ago   Up 3 minutes               0.0.0.0:80->80/tcp   docker-tutorial
+1d2e4ed4faa0   alpine/git          "git clone https://g…"   6 minutes ago   Exited (0) 6 minutes ago                        repo
+
+C:\Users\jchab>docker run --rm hello-world
+
+Hello from Docker!
+This message shows that your installation appears to be working correctly.
+
+To generate this message, Docker took the following steps:
+ 1. The Docker client contacted the Docker daemon.
+ 2. The Docker daemon pulled the "hello-world" image from the Docker Hub.
+    (amd64)
+ 3. The Docker daemon created a new container from that image which runs the
+    executable that produces the output you are currently reading.
+ 4. The Docker daemon streamed that output to the Docker client, which sent it
+    to your terminal.
+
+To try something more ambitious, you can run an Ubuntu container with:
+ $ docker run -it ubuntu bash
+
+Share images, automate workflows, and more with a free Docker ID:
+ https://hub.docker.com/
+
+For more examples and ideas, visit:
+ https://docs.docker.com/get-started/
+
+
+C:\Users\jchab>docker run -it ubuntu bash
+Unable to find image 'ubuntu:latest' locally
+latest: Pulling from library/ubuntu
+83ee3a23efb7: Pull complete                                                                                                                      db98fc6f11f0: Pull complete                                                                                                                      f611acd52c6c: Pull complete                                                                                                                      Digest: sha256:703218c0465075f4425e58fac086e09e1de5c340b12976ab9eb8ad26615c3715
+Status: Downloaded newer image for ubuntu:latest
+root@3072a2843e95:/# exit
+exit
+
+C:\Users\jchab>docker ps -a
+CONTAINER ID   IMAGE               COMMAND                  CREATED          STATUS                     PORTS                NAMES
+3072a2843e95   ubuntu              "bash"                   47 seconds ago   Exited (0) 9 seconds ago                        keen_wozniak
+c2c76065bb9e   docker101tutorial   "/docker-entrypoint.…"   5 minutes ago    Up 5 minutes               0.0.0.0:80->80/tcp   docker-tutorial
+1d2e4ed4faa0   alpine/git          "git clone https://g…"   8 minutes ago    Exited (0) 8 minutes ago                        repo
+
+C:\Users\jchab>docker rm keen_wozniak
+keen_wozniak
+
+C:\Users\jchab>docker rm docker-tutorial
+Error response from daemon: You cannot remove a running container c2c76065bb9e6cec92e5848298a1d9e2b97de96868ba521b91c96ab6c0b637a8. Stop the container before attempting removal or force remove
+
+C:\Users\jchab>docker rm docker-tutorial
+docker-tutorial
+
+C:\Users\jchab>docker rm repo
+repo
+
+C:\Users\jchab>docker ps -a
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+
+C:\Users\jchab>

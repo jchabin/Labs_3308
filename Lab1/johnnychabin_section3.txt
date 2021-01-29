@@ -1,0 +1,19 @@
+Microsoft Windows [Version 10.0.18363.1316]
+(c) 2019 Microsoft Corporation. All rights reserved.
+
+C:\Users\jchab>git --version
+git version 2.30.0.windows.2
+
+C:\Users\jchab>git config --global user.name "jchabin"
+
+C:\Users\jchab>git config --global user.name
+jchabin
+
+C:\Users\jchab>git config --global user.email "jchabin@cherrycreekschools.org"
+
+C:\Users\jchab>git config --global user.email
+jchabin@cherrycreekschools.org
+
+C:\Users\jchab>
+
+I was unable to do any steps after 6 because I did not have access to the github repository. I skipped to the next section.
