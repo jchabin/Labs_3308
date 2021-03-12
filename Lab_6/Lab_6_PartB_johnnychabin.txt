@@ -1,0 +1,209 @@
+Lab #6 Take Home
+Your name: Johnny Chabin
+
+
+---------------------------------------- Question 1 Query ---------------------------------------- 
+
+SELECT (SELECT city from customers WHERE customers.customer_id = orders.customer_id), COUNT(orders.order_id) FROM orders, customers GROUP BY (SELECT city from customers WHERE customers.customer_id = orders.customer_id);
+
+(This was the first thing I tried because I didn't see that there was a .ship_city property)
+
+---------------------------------------- Question 1 Results ---------------------------------------- 					
+
+Butte|273
+Paris|364
+Cowes|910
+Cork|1729
+Bern|728
+Aachen|546
+Brandenburg|1274
+Walla Walla|182
+Warszawa|637
+Münster|546
+San Francisco|364
+Eugene|1001
+Berlin|546
+Caracas|182
+Lille|455
+Lyon|910
+Elgin|455
+Salzburg|910
+Frankfurt a.M.|1365
+Stuttgart|910
+Portland|1092
+Bruxelles|637
+Århus|1001
+Barcelona|455
+Leipzig|455
+Reims|455
+Oulu|1365
+Seattle|1274
+Versailles|364
+Sevilla|910
+Helsinki|637
+Sao Paulo|2821
+Albuquerque|1638
+Marseille|1547
+Kirkland|273
+Boise|2821
+Reggio Emilia|1092
+Bergamo|910
+Strasbourg|1001
+Toulouse|1274
+München|1365
+Charleroi|1092
+Resende|819
+Tsawassen|1274
+London|4186
+Stavern|546
+Mannheim|637
+Barquisimeto|1274
+Anchorage|910
+Köln|910
+Genève|910
+Kobenhavn|637
+Luleå|1638
+Campinas|819
+Lisboa|1183
+Torino|546
+Bräcke|1729
+Graz|2730
+Cunewalde|2548
+Montréal|1183
+Madrid|728
+Lander|819
+México D.F.|2548
+Vancouver|273
+I. de Margarita|1092
+Buenos Aires|1456
+San Cristóbal|1638
+Rio de Janeiro|3094
+Nantes|637
+
+---------------------------------------- Question 2 Query ---------------------------------------- 
+
+SELECT order_id INTO ord FROM orders WHERE ship_city = 'Graz';
+SELECT order_details.product_id, order_details.quantity INTO pro FROM order_details, ord WHERE order_details.order_id IN(ord.order_id);
+SELECT (SELECT products.product_name FROM products WHERE products.product_id = pro.product_id) AS product_name, quantity FROM pro ORDER BY quantity ASC;
+
+---------------------------------------- Question 2 Results ---------------------------------------- 					
+
+Sir Rodney's Scones|5
+Mascarpone Fabioli|6
+Carnarvon Tigers|9
+Louisiana Fiery Hot Pepper Sauce|10
+Tofu|11
+Rössle Sauerkraut|13
+Konbu|13
+Jack's New England Clam Chowder|13
+Flotemysost|14
+Thüringer Rostbratwurst|14
+Côte de Blaye|20
+Pavlova|21
+Mozzarella di Giovanni|24
+Ravioli Angelo|25
+Guaraná Fantástica|28
+Singaporean Hokkien Fried Mee|28
+Gnocchi di nonna Alice|30
+Queso Cabrales|30
+Steeleye Stout|30
+Chef Anton's Gumbo Mix|32
+Rössle Sauerkraut|35
+Wimmers gute Semmelknödel|35
+Gumbär Gummibärchen|35
+Longlife Tofu|36
+Queso Manchego La Pastora|36
+Louisiana Fiery Hot Pepper Sauce|39
+Sir Rodney's Marmalade|39
+Steeleye Stout|40
+Spegesild|45
+Gudbrandsdalsost|45
+Alice Mutton|45
+Longlife Tofu|50
+Chang|50
+Sir Rodney's Scones|50
+Rhönbräu Klosterbier|50
+Gorgonzola Telino|60
+Tunnbröd|60
+Geitost|60
+Louisiana Hot Spiced Okra|60
+Pavlova|60
+Nord-Ost Matjeshering|60
+Vegie-spread|65
+Gudbrandsdalsost|65
+Chef Anton's Gumbo Mix|65
+Raclette Courdavault|70
+Gnocchi di nonna Alice|70
+Chocolade|70
+Gula Malacca|77
+Tarte au sucre|80
+Tourtière|80
+Sirop d'érable|120
+
+---------------------------------------- Question 3 Query ---------------------------------------- 
+
+SELECT customer_id, COUNT(customer_id) INTO cmp FROM orders GROUP BY customer_id;
+SELECT AVG(count) INTO avgs from cmp;
+SELECT (SELECT company_name FROM customers WHERE customers.customer_id = cmp.customer_id) FROM cmp, avgs WHERE cmp.count > avgs.avg;
+
+---------------------------------------- Question 3 Results ---------------------------------------- 					
+
+Old World Delicatessen
+Wartian Herkku
+Magazzini Alimentari Riuniti
+Queen Cozinha
+Rattlesnake Canyon Grocery
+Frankenversand
+Tortuga Restaurante
+Island Trading
+Lehmanns Marktstand
+Victuailles en stock
+Ricardo Adocicados
+LINO-Delicateses
+QUICK-Stop
+Hungry Owl All-Night Grocers
+Ottilies Käseladen
+Around the Horn
+Königlich Essen
+Mère Paillarde
+Bon app'
+Godos Cocina Típica
+B's Beverages
+Hanari Carnes
+Berglunds snabbköp
+Folk och fä HB
+Save-a-lot Markets
+Blondesddsl père et fils
+Vaffeljernet
+HILARION-Abastos
+Piccolo und mehr
+Ernst Handel
+Suprêmes délices
+Reggiani Caseifici
+Great Lakes Food Market
+La maison d'Asie
+Die Wandernde Kuh
+LILA-Supermercado
+White Clover Markets
+Richter Supermarkt
+Bottom-Dollar Markets
+
+---------------------------------------- Question 4 Query ---------------------------------------- 
+
+SELECT category_name FROM categories WHERE 10 < (SELECT COUNT(product_id) FROM products WHERE categories.category_id = products.category_id);
+
+---------------------------------------- Question 4 Results ---------------------------------------- 					
+
+Beverages
+Condiments
+Confections
+Seafood
+
+---------------------------------------- Question 5 Query ---------------------------------------- 
+
+SELECT product_name FROM products ORDER BY (SELECT SUM(quantity) FROM order_details WHERE order_details.product_id = products.product_id) DESC LIMIT 1;
+
+---------------------------------------- Question 5 Results ---------------------------------------- 					
+
+Camembert Pierrot
+

@@ -1,0 +1,78 @@
+Johnny Chabin
+
+Section 3
+
+1)
+CREATE TABLE University(
+  university_name VARCHAR(200),
+  date_established Date,
+  address Text,
+  student_population Int,
+  acceptance_rate Decimal,
+  PRIMARY KEY(university_name)
+);
+
+2)
+INSERT INTO University
+	VALUES('CU Boulder', '01/04/1876', '1100 28th St, Boulder, CO 80303', 35000, 0.8);
+
+
+Section 4
+
+1)
+SELECT name, major from football_players
+
+2)
+SELECT name, rushing_yards from football_players where rushing_yards > 70
+
+3)
+SELECT * from football_games where visitor_name = 'Nebraska'
+
+4)
+SELECT * from football_games where home_score > visitor_score
+
+5)
+SELECT visitor_name, game_date from football_games where game_date > '20200901' and game_date < '20201231'
+
+6)
+SELECT AVG(home_score) from football_games
+
+7)
+SELECT major, COUNT(major) AS number_of_players from football_players GROUP BY major
+
+8)
+SELECT major, COUNT(major) AS number_of_players from football_players WHERE major = 'CSCI' GROUP BY major
+
+
+Section 5
+
+1)
+CREATE VIEW winning_games AS
+	SELECT COUNT(visitor_name) FROM football_games
+  WHERE home_score > visitor_score;
+  
+SELECT * FROM winning_games;
+
+2)
+CREATE VIEW games AS
+	SELECT COUNT(visitor_name) FROM football_games;
+  
+SELECT * FROM games;
+
+3)
+CREATE VIEW percent AS
+	SELECT (winning_games.count / CAST((games.count) as decimal)) * 100 AS percent FROM winning_games, games;
+  
+SELECT * FROM percent;
+
+
+Section 6
+
+1)
+SELECT COUNT(visitor_name) FROM football_games WHERE 1=ANY(players);
+
+2)
+CREATE VIEW cGames AS SELECT CAST(COUNT(visitor_name) as decimal) FROM football_games WHERE 1 = ANY(players);
+CREATE VIEW cYards AS SELECT CAST(rushing_yards as decimal) FROM football_players WHERE 'Cedric Vega' = name;
+
+SELECT cYards.rushing_yards / cGames.count AS Average_Rushing_Yards FROM cGames, cYards;
