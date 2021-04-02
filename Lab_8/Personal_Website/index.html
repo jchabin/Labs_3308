@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>My Website</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+  <style>
+    * {
+      font-family: "Open Sans";
+    }
+
+    #nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: #444;
+      padding: 0;
+    }
+
+    .nav-option {
+      display: inline-block;
+      padding: 15px;
+      cursor: pointer;
+      color: white;
+      font-size: 20px;
+      margin: 0;
+    }
+
+    .nav-option:hover {
+      background: #666;
+    }
+
+    #pfp {
+      position: absolute;
+      top: 100px;
+      right: 50px;
+      clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+      width: 400px;
+    }
+
+    #ghub {
+      height: 40px;
+      margin: 5px;
+      filter: invert(1);
+      cursor: pointer;
+      float: right;
+      cursor: pointer;
+    }
+
+    #ghub:hover {
+      filter: invert(0.7);
+    }
+
+    #title {
+      width: 50%;
+      margin-top: 100px;
+      font-size: 60px;
+    }
+
+    #const {
+      position: absolute;
+      bottom: 0;
+      left: calc(50vw - 15vw);
+      width: 30vw;
+    }
+
+    .card {
+      height: 200px;
+      width: 200px;
+      border-radius: 20px;
+      box-shadow: 0 0 5px #555;
+      margin: 7px;
+      display: inline-block;
+      transition: transform .2s;
+      background-size: cover;
+      text-align: center;
+      line-height: 200px;
+      vertical-align: middle;
+      color: white;
+      font-size: 30px;
+    }
+
+    .card:hover {
+      transform: scale(1.1);
+    }
+
+    .bg {
+      background: rgba(0, 0, 0, 0.8);
+      padding: 10px;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="nav">
+    <div class="nav-option" onclick="location.href='index.html'">Home</div>
+    <div class="nav-option" onclick="location.href='about.html'">About</div>
+    <div class="nav-option" onclick="location.href='projects.html'">Projects</div>
+    <div class="nav-option" onclick="location.href='signup-modal/login.html'">Signup Page</div>
+    <div class="nav-option" onclick="location.href='tic-tac-toe'">Tic Tac Toe</div>
+    <div class="nav-option" onclick="FlickrAPI">Flickr API Gallery</div>
+    <img src="https://maxcdn.icons8.com/Share/icon/Logos/github_filled1600.png" id="ghub" onclick="location.href='https://github.com/jchabin'">
+  </div>
+  <marquee id="title">Welcome to my Website!</marquee>
+  <h1>Johnny Chabin</h1>
+  <p>Hi, I am a first-year Computer Science student at CU Boulder. I spend a lot of my time working on code-related things, usually for fun.</p>
+  <p>That's the main reason I went into CS, because I felt like I enjoyed it enough to spend a lot of time studying iy.</p>
+  <p>My favorite game is Minecraft, my favorite color is blue, and I do not sleep enough.</p>
+  <p>Also, I noticed the rubric did not have a section for "style" or "bearable to look at."</p>
+  <div class="card" style='background-image: url("https://www.jonesday.com/-/media/files/publications/2019/05/when-coding-is-criminal/when-coding-is-criminal.jpg");'><span class="bg">Coding</span></div>
+  <div class="card" style='background-image: url("https://d2vvqscadf4c1f.cloudfront.net/wofcBUjlRHugdXFWU7ox_piano.jpg");'><span class="bg">Music</span></div>
+  <div class="card" style='background-image: url("https://snowbrains.com/wp-content/uploads/2018/08/greenland-heli-skiing-mychaletfinder-min.jpg");'><span class="bg">Skiing</span></div>
+  <img id="pfp" src="https://cdn.acidcow.com/pics/20121108/strange_people_48.jpg">
+  <img id="const" src="https://images2.minutemediacdn.com/image/upload/c_fit,f_auto,fl_lossy,q_auto,w_728/v1555999902/shape/mentalfloss/construction_8.gif?itok=i0AHeyO3">
+</body>
+
+</html>

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>My Website</title>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+  <style>
+    * {
+      font-family: "Open Sans";
+    }
+
+    body {
+      background: #222;
+    }
+
+    #nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: #444;
+      padding: 0;
+      z-index: 2;
+    }
+
+    .nav-option {
+      display: inline-block;
+      padding: 15px;
+      cursor: pointer;
+      color: white;
+      font-size: 20px;
+      margin: 0;
+    }
+
+    .nav-option:hover {
+      background: #666;
+    }
+
+    #pfp {
+      position: absolute;
+      top: 100px;
+      right: 50px;
+      clip-path: polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%);
+      width: 400px;
+    }
+
+    #ghub {
+      height: 40px;
+      margin: 5px;
+      filter: invert(1);
+      cursor: pointer;
+      float: right;
+      cursor: pointer;
+    }
+
+    #ghub:hover {
+      filter: invert(0.7);
+    }
+
+    #searchmenu {
+      display: inline-block;
+      position: absolute;
+      top: 20vh;
+      left: 50vw;
+      transform: translate(-50%, 0);
+      background: #333;
+      padding: 5vmin;
+      font-size: 4vmin;
+      color: white;
+      z-index: 1;
+    }
+
+    input,
+    select {
+      margin-top: 3vmin;
+      /* width: 100%; */
+      font-size: 3vmin;
+    }
+
+    select {
+      width: 100%;
+    }
+
+    #search {
+      text-align: center;
+      background: #3aeb34;
+      margin-top: 3vmin;
+      padding: 1vmin;
+      cursor: pointer;
+      transition: background .2s;
+    }
+
+    #search:hover {
+      background: #2eb329;
+    }
+
+    #return {
+      text-align: center;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      perspective: 200vmin;
+      margin-top: 70vh;
+    }
+
+    .img {
+      /* height: 30%; */
+      width: 25%;
+      margin: 1vmin;
+      flex-grow: 1.2;
+      flex-shrink: 1.2;
+      /* vertical-align: middle */
+      filter: blur(20vmin);
+      opacity: 0;
+      transition: filter .3s, opacity .3s, transform .2s;
+      /* transform: rotateY(90deg);
+      transition: transform .3s; */
+      cursor: pointer;
+      border: 1vmin solid #111;
+    }
+
+    /* .img.type1 {
+      transform: rotateY(90deg);
+    } */
+
+    .img.load {
+      filter: blur(0);
+      opacity: 1;
+      transform: none;
+    }
+  </style>
+  <script>
+    function makeApiCall() {
+      var text = document.getElementById("term").value;
+      var num = parseInt(document.getElementById("num").value);
+
+      if (text == "")
+        return;
+
+      var x = new XMLHttpRequest();
+
+      x.onload = function(e) {
+        var resp = JSON.parse(e.target.response);
+        var ret = document.getElementById("return");
+        ret.innerHTML = "";
+        for (var i in resp.photos.photo) {
+          var p = resp.photos.photo[i];
+          var a = document.createElement("IMG");
+          a.className = "img";
+          //a.style.transform = "rotateY(" + (Math.random() < 0.5 ? "-" : "") + "90deg)";
+          a.src = "https://live.staticflickr.com/" + p.server + "/" + p.id + "_" + p.secret + "_b.jpg";
+          a.onload = load;
+          a.onmouseenter = enter;
+          a.onmouseleave = exit;
+          a.onclick = o;
+          ret.appendChild(a);
+        }
+      }
+
+      x.open("GET", "https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=2875b969859de2ea57d3283f59f25845&privacy_filter=1&safe_search=1&format=json&nojsoncallback=1&text=" + text + "&per_page=" + num);
+      x.send();
+    }
+
+    function load(e) {
+      this.className += " load";
+      //this.style.transform = "rotateY(" + (Math.random() * 10 - 5) + "deg)";
+    }
+
+    function upPersp() {
+      requestAnimationFrame(upPersp);
+      document.getElementById("return").style.perspectiveOrigin = "50% " + (window.scrollY + window.innerHeight / 2) + "px";
+    }
+
+    function enter() {
+      this.style.transform = "rotateY(" + 30 * (Math.random() - 0.5) + "deg) rotateX(" + 30 * (Math.random() - 0.5) + "deg)";
+      //var re = this.getBoundingClientRect();
+      //this.style.transform = "rotateY(" + -90 * ((re.left + re.width / 2 - window.innerWidth / 2) / window.innerWidth + (Math.random() - 0.5) * 0.4) + "deg)";
+    }
+
+    function exit() {
+      this.style.transform = "none";
+    }
+
+    function o() {
+      window.open(this.src);
+    }
+    upPersp()
+  </script>
+</head>
+
+<body>
+  <div id="nav">
+    <div class="nav-option" onclick="location.href='../index.html'">Home</div>
+    <div class="nav-option" onclick="location.href='../about.html'">About</div>
+    <div class="nav-option" onclick="location.href='../projects.html'">Projects</div>
+    <div class="nav-option" onclick="location.href='../signup-modal/login.html'">Signup Page</div>
+    <div class="nav-option" onclick="location.href='../tic-tac-toe'">Tic Tac Toe</div>
+    <div class="nav-option" onclick="">Flickr API Gallery</div>
+    <img src="https://maxcdn.icons8.com/Share/icon/Logos/github_filled1600.png" id="ghub" onclick="location.href='https://github.com/jchabin'">
+  </div>
+
+  <div id="searchmenu">
+    <div id="title">flickr API search</div>
+    <input id="term" placeholder="search flickr">
+    <br />
+    <select id="num">
+      <option value="30">30</option>
+      <option value="40">40</option>
+      <option value="50">50</option>
+      <option value="60">60</option>
+      <option value="70">70</option>
+      <option value="80">80</option>
+      <option value="90">90</option>
+      <option value="100">100</option>
+    </select>
+    <div id="search" onclick="makeApiCall()">search</div>
+  </div>
+  <div id="return"></div>
+</body>
+
+</html>
